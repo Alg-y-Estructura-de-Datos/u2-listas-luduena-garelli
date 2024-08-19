@@ -17,7 +17,7 @@ public:
   {
     left = nullptr;
     right = nullptr;
-    height=1;
+    height = 1;
   }
 
   NodoArbolAVL(T d)
@@ -57,31 +57,38 @@ public:
     this->left = l;
   }
 
-  int getHeight(){
+  int getHeight()
+  {
     return height;
   }
 
-  void setHeight(int h){
+  void setHeight(int h)
+  {
     height = h;
   }
 
-  void print(bool esDerecho, string identacion) {
-    if (right != NULL) {
-        right->print(true, identacion + (esDerecho ? "     " : "|    "));
+  void print(bool esDerecho, string identacion)
+  {
+    if (right != NULL)
+    {
+      right->print(true, identacion + (esDerecho ? "     " : "|    "));
     }
     cout << identacion;
-    if (esDerecho) {
-        cout << " /";
-    } else {
-        cout << " \\";
+    if (esDerecho)
+    {
+      cout << " /";
+    }
+    else
+    {
+      cout << " \\";
     }
     cout << "-- ";
     cout << data << endl;
-    if (left != NULL) {
-        left->print(false, identacion + (esDerecho ? "|    " : "     "));
+    if (left != NULL)
+    {
+      left->print(false, identacion + (esDerecho ? "|    " : "     "));
     }
-}
-
+  }
 };
 
 #endif // U05_ARBOL_ARBOL_NODOARBOLAVL_H_

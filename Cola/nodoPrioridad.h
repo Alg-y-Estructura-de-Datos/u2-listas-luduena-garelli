@@ -41,4 +41,4 @@ public:
     }
 };
 
-#endif //NODO_PRIORIDAD_H
+#endif // NODO_PRIORIDAD_H

@@ -54,23 +54,28 @@ public:
     this->left = l;
   }
 
-   void print(bool esDerecho, string identacion) {
-    if (right != NULL) {
-        right->print(true, identacion + (esDerecho ? "     " : "|    "));
+  void print(bool esDerecho, string identacion)
+  {
+    if (right != NULL)
+    {
+      right->print(true, identacion + (esDerecho ? "     " : "|    "));
     }
     cout << identacion;
-    if (esDerecho) {
-        cout << " /";
-    } else {
-        cout << " \\";
+    if (esDerecho)
+    {
+      cout << " /";
+    }
+    else
+    {
+      cout << " \\";
     }
     cout << "-- ";
     cout << data << endl;
-    if (left != NULL) {
-        left->print(false, identacion + (esDerecho ? "|    " : "     "));
+    if (left != NULL)
+    {
+      left->print(false, identacion + (esDerecho ? "|    " : "     "));
     }
-}
-
-  };
+  }
+};
 
 #endif // U05_ARBOL_ARBOL_NODOARBOL_H_

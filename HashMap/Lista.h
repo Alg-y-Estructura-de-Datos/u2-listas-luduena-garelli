@@ -10,41 +10,41 @@
  * @tparam T cualquier tipo de dato
  */
 template <class T>
-class Lista {
-    private:
-        Nodo<T> *inicio;
+class Lista
+{
+private:
+    Nodo<T> *inicio;
 
+public:
+    Lista();
 
-    public:
-        Lista();
+    Lista(const Lista<T> &li);
 
-        Lista(const Lista<T> &li);
+    ~Lista();
 
-        ~Lista();
+    bool esVacia();
 
-        bool esVacia();
+    int getTamanio();
 
-        int getTamanio();
+    void insertar(int pos, T dato);
 
-        void insertar(int pos, T dato);
+    void insertarPrimero(T dato);
 
-        void insertarPrimero(T dato);
+    void insertarUltimo(T dato);
 
-        void insertarUltimo(T dato);
+    void remover(int pos);
 
-        void remover(int pos);
+    T getDato(int pos);
 
-        T getDato(int pos);
+    void reemplazar(int pos, T dato);
 
-        void reemplazar(int pos, T dato);
+    void vaciar();
 
-        void vaciar();
+    void imprimir();
 
-        void imprimir();
+    void insertAfter2(int oldValue, int n, int newValue);
 
-        void insertAfter2(int oldValue, int n, int newValue);
-
-        Nodo<T> *getInicio();
+    Nodo<T> *getInicio();
 };
 
 /**
@@ -52,7 +52,8 @@ class Lista {
  * @tparam T
  */
 template <class T>
-Lista<T>::Lista() {
+Lista<T>::Lista()
+{
     inicio = nullptr;
 }
 
@@ -62,7 +63,8 @@ Lista<T>::Lista() {
  * @param li
  */
 template <class T>
-Lista<T>::Lista(const Lista<T> &li) {
+Lista<T>::Lista(const Lista<T> &li)
+{
     inicio = li.inicio;
 }
 
@@ -72,7 +74,8 @@ Lista<T>::Lista(const Lista<T> &li) {
  * @tparam T
  */
 template <class T>
-Lista<T>::~Lista() {
+Lista<T>::~Lista()
+{
     vaciar();
     delete inicio;
 }
@@ -83,7 +86,8 @@ Lista<T>::~Lista() {
  * @return true si la lista esta vacía, sino false
  */
 template <class T>
-bool Lista<T>::esVacia() {
+bool Lista<T>::esVacia()
+{
     return inicio == nullptr;
 }
 
@@ -93,11 +97,13 @@ bool Lista<T>::esVacia() {
  * @return la cantidad de nodos de la lista
  */
 template <class T>
-int Lista<T>::getTamanio() {
+int Lista<T>::getTamanio()
+{
     Nodo<T> *aux = inicio;
     int tam = 0;
 
-    while(aux != nullptr) {
+    while (aux != nullptr)
+    {
         aux = aux->getSiguiente();
         tam++;
     }
@@ -112,25 +118,29 @@ int Lista<T>::getTamanio() {
  * @param dato dato a insertar
  */
 template <class T>
-void Lista<T>::insertar(int pos, T dato) {
+void Lista<T>::insertar(int pos, T dato)
+{
     Nodo<T> *aux = inicio;
     int posActual = 0;
 
     Nodo<T> *nuevo = new Nodo<T>(dato, inicio);
     nuevo->setDato(dato);
 
-    if(pos == 0) {
+    if (pos == 0)
+    {
         nuevo->setSiguiente(inicio);
         inicio = nuevo;
         return;
     }
 
-    while(aux != nullptr && posActual < pos - 1) {
+    while (aux != nullptr && posActual < pos - 1)
+    {
         aux = aux->getSiguiente();
         posActual++;
     }
 
-    if(aux == nullptr) {
+    if (aux == nullptr)
+    {
         throw 400;
     }
 
@@ -144,7 +154,8 @@ void Lista<T>::insertar(int pos, T dato) {
  * @param dato dato a insertar
  */
 template <class T>
-void Lista<T>::insertarPrimero(T dato) {
+void Lista<T>::insertarPrimero(T dato)
+{
     insertar(0, dato);
 }
 
@@ -154,19 +165,22 @@ void Lista<T>::insertarPrimero(T dato) {
  * @param dato dato a insertar
  */
 template <class T>
-void Lista<T>::insertarUltimo(T dato) {
+void Lista<T>::insertarUltimo(T dato)
+{
     Nodo<T> *aux = inicio;
 
     Nodo<T> *nuevo = new Nodo<T>(dato, inicio);
     nuevo->setDato(dato);
 
-    if(aux == nullptr) {
+    if (aux == nullptr)
+    {
         nuevo->setSiguiente(inicio);
         inicio = nuevo;
         return;
     }
 
-    while(aux->getSiguiente() != nullptr) {
+    while (aux->getSiguiente() != nullptr)
+    {
         aux = aux->getSiguiente();
     }
 
@@ -180,22 +194,26 @@ void Lista<T>::insertarUltimo(T dato) {
  * @param pos posición del nodo a eliminar
  */
 template <class T>
-void Lista<T>::remover(int pos) {
+void Lista<T>::remover(int pos)
+{
     Nodo<T> *aux = inicio, *aBorrar;
     int posActual = 0;
 
-    if(pos == 0) {
+    if (pos == 0)
+    {
         inicio = inicio->getSiguiente();
         delete aux;
         return;
     }
 
-    while(aux != nullptr && posActual < pos - 1) {
+    while (aux != nullptr && posActual < pos - 1)
+    {
         aux = aux->getSiguiente();
         posActual++;
     }
 
-    if(aux == nullptr) {
+    if (aux == nullptr)
+    {
         throw 400;
     }
 
@@ -212,16 +230,19 @@ void Lista<T>::remover(int pos) {
  * @return dato almacenado en el nodo
  */
 template <class T>
-T Lista<T>::getDato(int pos) {
+T Lista<T>::getDato(int pos)
+{
     Nodo<T> *aux = inicio;
     int posActual = 0;
 
-    while(aux != nullptr && posActual < pos) {
+    while (aux != nullptr && posActual < pos)
+    {
         aux = aux->getSiguiente();
         posActual++;
     }
 
-    if(aux == nullptr) {
+    if (aux == nullptr)
+    {
         throw 400;
     }
 
@@ -235,16 +256,19 @@ T Lista<T>::getDato(int pos) {
  * @param dato nuevo dato a almacenar
  */
 template <class T>
-void Lista<T>::reemplazar(int pos, T dato) {
+void Lista<T>::reemplazar(int pos, T dato)
+{
     Nodo<T> *aux = inicio;
     int posActual = 0;
 
-    while(aux != nullptr && posActual < pos) {
+    while (aux != nullptr && posActual < pos)
+    {
         aux = aux->getSiguiente();
         posActual++;
     }
 
-    if(aux == nullptr) {
+    if (aux == nullptr)
+    {
         throw 400;
     }
 
@@ -256,10 +280,12 @@ void Lista<T>::reemplazar(int pos, T dato) {
  * @tparam T
  */
 template <class T>
-void Lista<T>::vaciar() {
+void Lista<T>::vaciar()
+{
     Nodo<T> *aux = inicio, *aBorrar;
 
-    while(aux != nullptr) {
+    while (aux != nullptr)
+    {
         aBorrar = aux;
         aux = aux->getSiguiente();
         delete aBorrar;
@@ -273,10 +299,12 @@ void Lista<T>::vaciar() {
  * @tparam T
  */
 template <class T>
-void Lista<T>::imprimir() {
+void Lista<T>::imprimir()
+{
     Nodo<T> *aux = inicio;
 
-    while(aux != nullptr) {
+    while (aux != nullptr)
+    {
         std::cout << aux->getDato() << "->";
         aux = aux->getSiguiente();
     }
@@ -293,15 +321,19 @@ void Lista<T>::imprimir() {
  * @param newValue nuevo valor a insertar
  */
 template <class T>
-void Lista<T>::insertAfter2(int oldValue, int n, int newValue) {
+void Lista<T>::insertAfter2(int oldValue, int n, int newValue)
+{
     Nodo<T> *aux = inicio;
 
     int contador = 0, posActual = 0;
 
-    while(aux != nullptr) {
-        if(aux->getDato() == oldValue) {
+    while (aux != nullptr)
+    {
+        if (aux->getDato() == oldValue)
+        {
             contador++;
-            if(contador == n) {
+            if (contador == n)
+            {
                 insertar(posActual + 1, newValue);
                 return;
             }
@@ -312,7 +344,8 @@ void Lista<T>::insertAfter2(int oldValue, int n, int newValue) {
 }
 
 template <class T>
-Nodo<T> *Lista<T>::getInicio() {
+Nodo<T> *Lista<T>::getInicio()
+{
     return inicio;
 }
 

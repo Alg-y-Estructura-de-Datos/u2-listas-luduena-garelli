@@ -27,7 +27,7 @@ public:
 
     T getDato(int pos);
 
-    void eliminarPorValor(const T& valor);
+    void eliminarPorValor(const T &valor);
 
     void imprimir();
 };
@@ -186,14 +186,16 @@ T CircList<T>::getDato(int pos)
 template <class T>
 void CircList<T>::imprimir()
 {
-    if (esVacia()) {
+    if (esVacia())
+    {
         std::cout << "La lista está vacía." << std::endl;
         return;
     }
 
     Nodo<T> *aux = inicio;
 
-    do {
+    do
+    {
         std::cout << aux->getDato() << "->";
         aux = aux->getSiguiente();
     } while (aux != inicio);
@@ -202,32 +204,44 @@ void CircList<T>::imprimir()
 }
 
 template <class T>
-void CircList<T>::eliminarPorValor(const T& valor) {
-    if (esVacia()) {
+void CircList<T>::eliminarPorValor(const T &valor)
+{
+    if (esVacia())
+    {
         return;
     }
 
     Nodo<T> *actual = inicio;
     Nodo<T> *previo = nullptr;
 
-    do {
-        if (actual->getDato() == valor) {
-            if (previo) {
+    do
+    {
+        if (actual->getDato() == valor)
+        {
+            if (previo)
+            {
                 previo->setSiguiente(actual->getSiguiente());
-                if (actual == inicio) {
+                if (actual == inicio)
+                {
                     inicio = actual->getSiguiente();
                 }
                 delete actual;
                 return;
-            } else {
+            }
+            else
+            {
                 Nodo<T> *ultimo = inicio;
-                while (ultimo->getSiguiente() != inicio) {
+                while (ultimo->getSiguiente() != inicio)
+                {
                     ultimo = ultimo->getSiguiente();
                 }
-                if (inicio == inicio->getSiguiente()) {
+                if (inicio == inicio->getSiguiente())
+                {
                     delete inicio;
                     inicio = nullptr;
-                } else {
+                }
+                else
+                {
                     ultimo->setSiguiente(inicio->getSiguiente());
                     delete inicio;
                     inicio = ultimo->getSiguiente();

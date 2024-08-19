@@ -76,9 +76,12 @@ T HashMap<K, T>::get(K clave)
   {
     throw 404;
   }
-  if(tabla[pos]->getClave() == clave){
+  if (tabla[pos]->getClave() == clave)
+  {
     return tabla[pos]->getValor();
-  }else{
+  }
+  else
+  {
     throw 409;
   }
 }
@@ -90,11 +93,11 @@ void HashMap<K, T>::put(K clave, T valor)
 
   if (tabla[pos] != NULL)
   {
-    //Manejar la Colision!!!!!!!
+    // Manejar la Colision!!!!!!!
     throw 409;
   }
 
-  tabla[pos] = new HashEntry<K, T>(clave, valor); //Corresponde a una fila en la tabla HASH
+  tabla[pos] = new HashEntry<K, T>(clave, valor); // Corresponde a una fila en la tabla HASH
 }
 
 template <class K, class T>

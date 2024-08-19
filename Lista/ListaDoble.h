@@ -4,11 +4,12 @@
 #include <iostream>
 
 template <class T>
-class NodoDoble {
+class NodoDoble
+{
 private:
     T dato;
-    NodoDoble<T>* siguiente;
-    NodoDoble<T>* anterior;
+    NodoDoble<T> *siguiente;
+    NodoDoble<T> *anterior;
 
 public:
     NodoDoble(T d) : dato(d), siguiente(nullptr), anterior(nullptr) {}
@@ -16,18 +17,19 @@ public:
     T getDato() const { return dato; }
     void setDato(T d) { dato = d; }
 
-    NodoDoble<T>* getSiguiente() const { return siguiente; }
-    void setSiguiente(NodoDoble<T>* sig) { siguiente = sig; }
+    NodoDoble<T> *getSiguiente() const { return siguiente; }
+    void setSiguiente(NodoDoble<T> *sig) { siguiente = sig; }
 
-    NodoDoble<T>* getAnterior() const { return anterior; }
-    void setAnterior(NodoDoble<T>* ant) { anterior = ant; }
+    NodoDoble<T> *getAnterior() const { return anterior; }
+    void setAnterior(NodoDoble<T> *ant) { anterior = ant; }
 };
 
 template <class T>
-class ListaDoble {
+class ListaDoble
+{
 private:
-    NodoDoble<T>* inicio;
-    NodoDoble<T>* fin;
+    NodoDoble<T> *inicio;
+    NodoDoble<T> *fin;
 
 public:
     ListaDoble();
@@ -48,21 +50,25 @@ template <class T>
 ListaDoble<T>::ListaDoble() : inicio(nullptr), fin(nullptr) {}
 
 template <class T>
-ListaDoble<T>::~ListaDoble() {
+ListaDoble<T>::~ListaDoble()
+{
     vaciar();
 }
 
 template <class T>
-bool ListaDoble<T>::esVacia() const {
+bool ListaDoble<T>::esVacia() const
+{
     return inicio == nullptr;
 }
 
 template <class T>
-int ListaDoble<T>::getTamanio() const {
-    NodoDoble<T>* aux = inicio;
+int ListaDoble<T>::getTamanio() const
+{
+    NodoDoble<T> *aux = inicio;
     int size = 0;
 
-    while (aux != nullptr) {
+    while (aux != nullptr)
+    {
         aux = aux->getSiguiente();
         size++;
     }
@@ -71,12 +77,16 @@ int ListaDoble<T>::getTamanio() const {
 }
 
 template <class T>
-void ListaDoble<T>::insertarPrimero(T dato) {
-    NodoDoble<T>* nuevo = new NodoDoble<T>(dato);
+void ListaDoble<T>::insertarPrimero(T dato)
+{
+    NodoDoble<T> *nuevo = new NodoDoble<T>(dato);
 
-    if (esVacia()) {
+    if (esVacia())
+    {
         inicio = fin = nuevo;
-    } else {
+    }
+    else
+    {
         nuevo->setSiguiente(inicio);
         inicio->setAnterior(nuevo);
         inicio = nuevo;
@@ -84,12 +94,16 @@ void ListaDoble<T>::insertarPrimero(T dato) {
 }
 
 template <class T>
-void ListaDoble<T>::insertarUltimo(T dato) {
-    NodoDoble<T>* nuevo = new NodoDoble<T>(dato);
+void ListaDoble<T>::insertarUltimo(T dato)
+{
+    NodoDoble<T> *nuevo = new NodoDoble<T>(dato);
 
-    if (esVacia()) {
+    if (esVacia())
+    {
         inicio = fin = nuevo;
-    } else {
+    }
+    else
+    {
         fin->setSiguiente(nuevo);
         nuevo->setAnterior(fin);
         fin = nuevo;
@@ -97,34 +111,44 @@ void ListaDoble<T>::insertarUltimo(T dato) {
 }
 
 template <class T>
-void ListaDoble<T>::remover(int pos) {
-    if (esVacia() || pos < 0 || pos >= getTamanio()) {
+void ListaDoble<T>::remover(int pos)
+{
+    if (esVacia() || pos < 0 || pos >= getTamanio())
+    {
         throw std::out_of_range("Posición inválida");
     }
 
-    NodoDoble<T>* aux = inicio;
+    NodoDoble<T> *aux = inicio;
     int posActual = 0;
 
-    while (aux != nullptr && posActual < pos) {
+    while (aux != nullptr && posActual < pos)
+    {
         aux = aux->getSiguiente();
         posActual++;
     }
 
-    if (aux == inicio) {
+    if (aux == inicio)
+    {
         inicio = inicio->getSiguiente();
-        if (inicio != nullptr) {
+        if (inicio != nullptr)
+        {
             inicio->setAnterior(nullptr);
         }
-    } else {
+    }
+    else
+    {
         aux->getAnterior()->setSiguiente(aux->getSiguiente());
-        if (aux->getSiguiente() != nullptr) {
+        if (aux->getSiguiente() != nullptr)
+        {
             aux->getSiguiente()->setAnterior(aux->getAnterior());
         }
     }
 
-    if (aux == fin) {
+    if (aux == fin)
+    {
         fin = fin->getAnterior();
-        if (fin != nullptr) {
+        if (fin != nullptr)
+        {
             fin->setSiguiente(nullptr);
         }
     }
@@ -133,15 +157,18 @@ void ListaDoble<T>::remover(int pos) {
 }
 
 template <class T>
-T ListaDoble<T>::getDato(int pos) const {
-    if (pos < 0 || pos >= getTamanio()) {
+T ListaDoble<T>::getDato(int pos) const
+{
+    if (pos < 0 || pos >= getTamanio())
+    {
         throw std::out_of_range("Posición inválida");
     }
 
-    NodoDoble<T>* aux = inicio;
+    NodoDoble<T> *aux = inicio;
     int posActual = 0;
 
-    while (aux != nullptr && posActual < pos) {
+    while (aux != nullptr && posActual < pos)
+    {
         aux = aux->getSiguiente();
         posActual++;
     }
@@ -150,15 +177,18 @@ T ListaDoble<T>::getDato(int pos) const {
 }
 
 template <class T>
-void ListaDoble<T>::reemplazar(int pos, T dato) {
-    if (pos < 0 || pos >= getTamanio()) {
+void ListaDoble<T>::reemplazar(int pos, T dato)
+{
+    if (pos < 0 || pos >= getTamanio())
+    {
         throw std::out_of_range("Posición inválida");
     }
 
-    NodoDoble<T>* aux = inicio;
+    NodoDoble<T> *aux = inicio;
     int posActual = 0;
 
-    while (aux != nullptr && posActual < pos) {
+    while (aux != nullptr && posActual < pos)
+    {
         aux = aux->getSiguiente();
         posActual++;
     }
@@ -167,10 +197,12 @@ void ListaDoble<T>::reemplazar(int pos, T dato) {
 }
 
 template <class T>
-void ListaDoble<T>::imprimir() const {
-    NodoDoble<T>* aux = inicio;
+void ListaDoble<T>::imprimir() const
+{
+    NodoDoble<T> *aux = inicio;
 
-    while (aux != nullptr) {
+    while (aux != nullptr)
+    {
         std::cout << aux->getDato() << " <-> ";
         aux = aux->getSiguiente();
     }
@@ -178,11 +210,13 @@ void ListaDoble<T>::imprimir() const {
 }
 
 template <class T>
-void ListaDoble<T>::vaciar() {
-    NodoDoble<T>* aux = inicio;
+void ListaDoble<T>::vaciar()
+{
+    NodoDoble<T> *aux = inicio;
 
-    while (aux != nullptr) {
-        NodoDoble<T>* aBorrar = aux;
+    while (aux != nullptr)
+    {
+        NodoDoble<T> *aBorrar = aux;
         aux = aux->getSiguiente();
         delete aBorrar;
     }
